@@ -1,0 +1,681 @@
+<!--
+  ============================================================
+  STARFIGHTER FINANCIAL — GHL CODE-BLOCK EMBED VERSION
+  ============================================================
+  Paste this entire block into a GoHighLevel Custom Code / HTML element.
+
+   • No <!DOCTYPE>, <html>, <head> or <body> wrapper
+   • Google Fonts via @import instead of <link>
+   • ALL CSS scoped under .sf-site so nothing leaks into the GHL page
+   • CSS variables on .sf-site, not :root
+   • Full-bleed uses calc() margins (no 100vw, so no scrollbar overflow)
+   • Anchor IDs prefixed sf- so they cannot collide with GHL element IDs
+
+  SETUP: set the containing GHL Section/Row to FULL WIDTH with no horizontal
+  padding. Delete the <nav>/<footer> blocks if GHL supplies its own.
+  position:sticky often will not stick inside GHL containers.
+  ============================================================
+-->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+.sf-site {
+
+      
+      --navy: #10182B;
+      --steel: #6E7480;
+      --offwhite: #F6F5F2;
+      --white: #ffffff;
+      --line: #e4e2dc;
+      
+      --accent: #4453A8;
+      --accent-dark: #3D4A97;
+      --accent-light: #8E99DC;  
+     position: relative;      overflow-x: hidden;
+  /* full-bleed breakout — calc margins avoid the 100vw scrollbar bug */
+  position: relative;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow-x: hidden;
+  /* base typography, scoped (was on <body>) */
+ font-family: "Inter", Helvetica, Arial, sans-serif; font-size: 17px; color: var(--navy); background: var(--offwhite); line-height: 1.65; -webkit-font-smoothing: antialiased;
+  font-size: 17px;
+  text-align: left;
+}
+
+.sf-site *, .sf-site *::before, .sf-site *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }  /* only global rule — delete if unwanted */
+.sf-site .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+.sf-site h1, .sf-site h2, .sf-site h3, .sf-site h4 { font-family: "Archivo", "Arial Black", sans-serif; letter-spacing: -0.02em; }
+.sf-site .lockup { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+.sf-site .lockup svg { flex-shrink: 0; }
+.sf-site .lockup .word { display: block; font-family: "Archivo", "Arial Black", sans-serif; font-weight: 900; font-size: 1.1rem; letter-spacing: 0.02em; line-height: 1; color: var(--navy); }
+.sf-site .lockup .unit { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.32em; margin-top: 4px; color: var(--accent); }
+.sf-site .lockup-reverse .word { color: var(--white); }
+.sf-site nav { position: sticky; top: 0; z-index: 50; background: var(--navy); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sf-site .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.sf-site .nav-links { display: flex; align-items: center; gap: 1.7rem; }
+.sf-site .nav-links a { color: #c7cad2; text-decoration: none; font-size: 0.95rem; font-weight: 500; padding-bottom: 3px; }
+.sf-site .nav-links a:hover { color: var(--white); }
+.sf-site .nav-links a.active { color: var(--white); border-bottom: 2px solid var(--accent); }
+.sf-site .btn { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; border-radius: 6px; transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease; }
+.sf-site .btn-primary { background: var(--accent); color: var(--white); border: none; font-weight: 700; font-size: 1rem; padding: 0.7rem 1.4rem; }
+.sf-site .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+.sf-site .btn-secondary { background: transparent; color: var(--navy); border: 1px solid var(--navy); font-weight: 600; font-size: 1rem; padding: 0.7rem 1.4rem; }
+.sf-site .btn-secondary:hover { background: rgba(16,24,43,0.06); }
+.sf-site .btn-light { background: var(--white); color: var(--navy); font-weight: 700; font-size: 1rem; padding: 0.7rem 1.4rem; }
+.sf-site .btn-light:hover { background: #e6e8ef; transform: translateY(-1px); }
+.sf-site .btn-lg { padding: 0.95rem 2.2rem; font-size: 1.15rem; }
+.sf-site .hero { background: var(--offwhite); padding: 6.5rem 0 5rem; text-align: center; }
+.sf-site .status { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.875rem; letter-spacing: 0.26em; color: var(--accent); border: 1px solid rgba(68,83,168,0.35); border-radius: 4px; padding: 0.32rem 0.75rem; margin-bottom: 1.9rem; }
+.sf-site .hero h1 { font-size: clamp(3rem, 6vw, 4rem); font-weight: 900; line-height: 1.03; margin-bottom: 1.35rem; }
+.sf-site .hero h1 .hl { color: var(--accent); }
+.sf-site .hero .lede { font-size: 1.125rem; color: var(--steel); max-width: 720px; margin: 0 auto 2.5rem; }
+.sf-site .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.sf-site .hero .subnote { margin-top: 1.9rem; font-family: "IBM Plex Mono", monospace; font-size: 0.875rem; color: var(--steel); letter-spacing: 0.14em; }
+.sf-site .trust { background: var(--navy); padding: 1.15rem 0; }
+.sf-site .trust-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem 1.9rem; }
+.sf-site .trust-item { display: flex; align-items: center; gap: 0.55rem; white-space: nowrap; }
+.sf-site .trust-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sf-site .trust-item span { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; letter-spacing: 0.08em; color: #aeb2bd; text-transform: uppercase; }
+.sf-site section { padding: 5.5rem 0; }
+.sf-site .kicker { font-family: "IBM Plex Mono", monospace; font-size: 0.875rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent); text-align: center; margin-bottom: 0.8rem; }
+.sf-site h2.section-title { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; text-align: center; margin-bottom: 0.8rem; }
+.sf-site .section-sub { text-align: center; color: var(--steel); max-width: 680px; margin: 0 auto 3.25rem; }
+.sf-site .band-white { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.sf-site .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.35rem; }
+.sf-site .step { background: var(--white); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 1.9rem; }
+.sf-site .step .num { font-family: "IBM Plex Mono", monospace; font-size: 0.875rem; color: var(--accent); letter-spacing: 0.14em; margin-bottom: 0.9rem; }
+.sf-site .step h3 { font-size: 1.28rem; font-weight: 700; margin-bottom: 0.55rem; }
+.sf-site .step p { color: var(--steel); font-size: 1rem; }
+.sf-site .fee { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.1rem; margin-bottom: 1.6rem; }
+.sf-site .fee-part { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1.6rem; position: relative; }
+.sf-site .fee-part .tag { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.14em; color: var(--steel); text-transform: uppercase; margin-bottom: 0.7rem; }
+.sf-site .fee-part h4 { font-size: 1.12rem; font-weight: 700; margin-bottom: 0.45rem; }
+.sf-site .fee-part p { color: var(--steel); font-size: 0.95rem; }
+.sf-site .fee-part.ours { border: 2px solid var(--accent); }
+.sf-site .fee-part.ours .tag { color: var(--accent); }
+.sf-site .fee-note { text-align: center; font-family: "IBM Plex Mono", monospace; font-size: 0.82rem; letter-spacing: 0.06em; color: var(--steel); }
+.sf-site .calc { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; max-width: 940px; margin: 0 auto; }
+.sf-site .calc-inputs { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 2rem; }
+.sf-site .calc-field { margin-bottom: 1.5rem; }
+.sf-site .calc-field:last-of-type { margin-bottom: 1.75rem; }
+.sf-site .calc-field label { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.55rem; }
+.sf-site .calc-field .hint { display: block; font-family: "Inter", sans-serif; font-size: 0.85rem; letter-spacing: 0; text-transform: none; color: var(--steel); margin-top: 0.3rem; }
+.sf-site .calc-input-wrap { position: relative; }
+.sf-site .calc-input-wrap .sym { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--steel); font-weight: 600; }
+.sf-site .calc-field input {
+      width: 100%; font-family: "Inter", sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--navy);
+      padding: 0.8rem 0.9rem 0.8rem 2rem; border: 1px solid var(--line); border-radius: 6px; background: var(--offwhite);
+    }
+.sf-site .calc-field input:focus { outline: none; border-color: var(--accent); background: var(--white); }
+.sf-site .calc-note { font-size: 0.88rem; color: var(--steel); line-height: 1.55; }
+.sf-site .calc-results { background: var(--navy); border-radius: 10px; padding: 2rem; }
+.sf-site .calc-headline { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem; }
+.sf-site .calc-big { font-family: "Archivo", sans-serif; font-weight: 900; font-size: clamp(3rem, 8vw, 4.2rem); line-height: 1; color: var(--white); letter-spacing: -0.03em; }
+.sf-site .calc-big .pct { font-size: 0.45em; color: var(--accent); margin-left: 0.15rem; }
+.sf-site .calc-big-label { color: #aeb2bd; font-size: 0.98rem; margin-top: 0.5rem; margin-bottom: 1.6rem; }
+.sf-site .calc-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.85rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+.sf-site .calc-row .k { color: #aeb2bd; font-size: 0.94rem; }
+.sf-site .calc-row .v { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--white); white-space: nowrap; }
+.sf-site .calc-foot { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.88rem; color: #8d93a0; line-height: 1.6; }
+@media (max-width: 860px) {
+  .sf-site .calc { grid-template-columns: 1fr; gap: 1.75rem; }
+}
+.sf-site .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.35rem; }
+.sf-site .card { background: var(--white); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 1.9rem; }
+.sf-site .card .ico { width: 32px; height: 32px; color: var(--accent); margin-bottom: 1.1rem; }
+.sf-site .card h3 { font-size: 1.28rem; font-weight: 700; margin-bottom: 0.5rem; }
+.sf-site .card p { color: var(--steel); font-size: 1rem; }
+.sf-site .compare-table { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--white); }
+.sf-site .compare-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; align-items: center; }
+.sf-site .compare-row + .compare-row { border-top: 1px solid var(--line); }
+.sf-site .compare-row.head { background: var(--navy); }
+.sf-site .compare-row.head .cell { color: var(--white); font-weight: 700; font-size: 0.95rem; font-family: "Archivo", sans-serif; }
+.sf-site .compare-row.head .cell.accent { color: var(--accent-light); }
+.sf-site .compare-row .cell { padding: 1.1rem 1.4rem; font-size: 0.97rem; color: var(--steel); }
+.sf-site .compare-row .cell.feature { font-weight: 700; color: var(--navy); font-family: "Archivo", sans-serif; }
+.sf-site .compare-row .cell.no::before { content: "\2014"; margin-right: 0.6rem; color: #c9cbd6; }
+.sf-site .compare-row .cell.yes { color: var(--accent); font-weight: 600; }
+.sf-site .compare-row .cell.yes::before { content: "\2713"; margin-right: 0.6rem; font-weight: 700; }
+@media (max-width: 720px) {
+  .sf-site .compare-row .cell { padding: 0.85rem 0.7rem; font-size: 0.85rem; }
+  .sf-site .compare-row.head .cell { font-size: 0.8rem; }
+}
+.sf-site .est { background: var(--navy); position: relative; overflow: hidden; }
+.sf-site .est::before { content:""; position:absolute; inset:0; background: radial-gradient(620px 480px at 12% 0%, rgba(68,83,168,.45), transparent 62%); pointer-events:none; }
+.sf-site .est .wrap { position: relative; z-index: 1; }
+.sf-site .est .kicker { color: var(--accent-light); }
+.sf-site .est h2.section-title { color: var(--white); }
+.sf-site .est .section-sub { color: #aeb2bd; }
+.sf-site .est-card { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; max-width: 940px; margin: 0 auto; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 2.75rem; }
+.sf-site .est-fields { display: flex; flex-direction: column; gap: 2.1rem; }
+.sf-site .est-field label { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: #aeb2bd; margin-bottom: 0.9rem; }
+.sf-site .est-field label .val { font-family: "Archivo", sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--accent-light); letter-spacing: -0.01em; text-transform: none; }
+.sf-site .est-field input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 3px; background: rgba(255,255,255,.16); outline: none; }
+.sf-site .est-field input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--white); box-shadow: 0 0 0 5px rgba(68,83,168,.55); cursor: pointer; }
+.sf-site .est-field input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--white); box-shadow: 0 0 0 5px rgba(68,83,168,.55); cursor: pointer; border: none; }
+.sf-site .est-out { text-align: center; padding: 2.1rem 1.5rem; background: rgba(68,83,168,.16); border: 1px solid rgba(68,83,168,.5); border-radius: 12px; }
+.sf-site .est-out .lbl { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: #aeb2bd; margin-bottom: 0.8rem; }
+.sf-site .est-out .num { font-family: "Archivo", sans-serif; font-size: clamp(2.6rem, 6vw, 3.4rem); font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em; margin-bottom: 0.6rem; }
+.sf-site .est-out .num .cur { color: var(--accent-light); font-size: 0.5em; vertical-align: top; margin-right: 2px; }
+.sf-site .est-out .sub { font-size: 0.9rem; color: #8d93a0; line-height: 1.6; }
+.sf-site .est-fine { grid-column: 1 / -1; font-size: 0.85rem; color: #8d93a0; text-align: center; line-height: 1.65; padding-top: 0.5rem; }
+.sf-site .est-fine a { color: var(--accent-light); }
+@media (max-width: 900px) {
+  .sf-site .est-card { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 2rem; }
+}
+.sf-site .tgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.35rem; }
+.sf-site .tcard { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 1.9rem; display: flex; flex-direction: column; gap: 1.15rem; }
+.sf-site .tstars { color: var(--accent); font-size: 0.95rem; letter-spacing: 0.12em; }
+.sf-site .tquote { font-size: 1rem; line-height: 1.65; color: var(--steel); flex-grow: 1; }
+.sf-site .tperson { display: flex; align-items: center; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.sf-site .tavatar { width: 38px; height: 38px; border-radius: 50%; background: rgba(68,83,168,.12); color: var(--accent); display: flex; align-items: center; justify-content: center; font-family: "Archivo", sans-serif; font-weight: 800; font-size: 0.9rem; flex-shrink: 0; }
+.sf-site .tperson .nm { font-size: 0.95rem; font-weight: 600; color: var(--navy); }
+.sf-site .tperson .bz { font-size: 0.86rem; color: var(--steel); }
+.sf-site .dark { background: var(--navy); }
+.sf-site .dark .kicker { color: var(--accent); }
+.sf-site .dark h2.section-title { color: var(--white); }
+.sf-site .dark .section-sub { color: #aeb2bd; }
+.sf-site .split { display: grid; grid-template-columns: 1fr 1.15fr; gap: 4rem; align-items: start; }
+.sf-site .split .kicker { text-align: left; }
+.sf-site .split h2 { font-size: clamp(1.9rem, 3.8vw, 2.4rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; }
+.sf-site .split > div > p { color: #aeb2bd; margin-bottom: 2rem; }
+.sf-site .diff { display: grid; grid-template-columns: 42px 1fr; gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.sf-site .diff:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+.sf-site .diff .n { font-family: "IBM Plex Mono", monospace; font-size: 0.85rem; color: var(--accent); padding-top: 0.15rem; }
+.sf-site .diff h4 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+.sf-site .diff p { color: #aeb2bd; font-size: 0.97rem; }
+@media (max-width: 900px) {
+  .sf-site .split { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+.sf-site .final { background: var(--navy); text-align: center; }
+.sf-site .final h2 { color: var(--white); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 1.15rem; }
+.sf-site .final h2 .hl { color: var(--accent); }
+.sf-site .final p { color: #aeb2bd; max-width: 640px; margin: 0 auto 2.25rem; }
+.sf-site .final .fineprint { font-family: "IBM Plex Mono", monospace; font-size: 0.82rem; color: var(--steel); letter-spacing: 0.06em; margin-top: 1.4rem; }
+.sf-site .final .contact-line { font-family: "IBM Plex Mono", monospace; font-size: 0.9rem; color: var(--steel); letter-spacing: 0.05em; margin-top: 1.6rem; }
+.sf-site .final .contact-line a { color: #c7cad2; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.25); }
+.sf-site .final .contact-line a:hover { color: var(--white); }
+.sf-site footer { background: var(--navy); color: #9aa0ac; padding: 3.25rem 0 2.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
+.sf-site .foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; margin-bottom: 2.25rem; }
+.sf-site footer .foot-h { font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.95rem; }
+.sf-site footer ul { list-style: none; }
+.sf-site footer li { margin-bottom: 0.45rem; }
+.sf-site footer a { color: #c7cad2; text-decoration: none; font-size: 0.95rem; }
+.sf-site footer a:hover { color: var(--white); }
+.sf-site .foot-disclaimer { font-size: 0.82rem; color: #6a6f7b; max-width: 860px; margin: 0 auto 1.6rem; text-align: center; line-height: 1.6; }
+.sf-site .foot-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; color: var(--steel); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; }
+@media (max-width: 900px) {
+  .sf-site .nav-links a:not(.btn) { display: none; }
+}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sf-sf-mark-rev" viewBox="0 0 64 40">
+      <line x1="15" y1="12" x2="33" y2="12" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+      <line x1="4"  y1="20" x2="33" y2="20" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+      <line x1="13" y1="28" x2="33" y2="28" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M46,7 L49.23,15.55 L58.36,15.98 L51.23,21.70 L53.64,30.52 L46,25.5 L38.36,30.52 L40.77,21.70 L33.64,15.98 L42.77,15.55 Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="sf-site">
+
+  <!-- ================= NAV ================= -->
+  <nav>
+    <div class="wrap nav-inner">
+      <a class="lockup lockup-reverse" href="https://www.starfighterfinancial.com" aria-label="Starfighter Financial — home">
+        <svg width="54" height="34" style="color: var(--accent);"><use href="#sf-sf-mark-rev"/></svg>
+        <span><span class="word">STARFIGHTER</span><span class="unit">FINANCIAL</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#sf-how" class="active">How It Works</a>
+        <a href="#sf-fees">Fee Anatomy</a>
+        <a href="#sf-calculator">Calculator</a>
+        <a href="#sf-services">Services</a>
+        <a href="#sf-compare">Compare</a>
+        <a href="#sf-estimate">Savings</a>
+        <a href="#sf-start" class="btn btn-primary">Free Statement Review</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero" id="sf-top">
+    <div class="wrap">
+      <span class="status">MERCHANT PAYMENT PROCESSING</span>
+      <h1>Know exactly what<br>you pay. <span class="hl">Line by line.</span></h1>
+      <p class="lede">Most merchant statements are built to be hard to read. We show you the three parts of every processing fee — interchange, network assessments, and our markup — and then we show you ours. Send a statement and find out where you actually stand.</p>
+      <div class="hero-cta">
+        <a href="#sf-start" class="btn btn-primary btn-lg">Get a Free Statement Review</a>
+        <a href="#sf-calculator" class="btn btn-secondary btn-lg">Calculate Your Effective Rate</a>
+      </div>
+      <div class="subnote">NO COMMITMENT · NO SALES PRESSURE · REVIEW RETURNED IN PLAIN ENGLISH</div>
+    </div>
+  </header>
+
+  <!-- ================= TRUST BAR ================= -->
+  <div class="trust">
+    <div class="wrap trust-inner">
+      <div class="trust-item"><span class="dot"></span><span>All 50 States</span></div>
+      <div class="trust-item"><span class="dot"></span><span>No Out-of-Pocket Equipment</span></div>
+      <div class="trust-item"><span class="dot"></span><span>Next-Day Funding</span></div>
+      <div class="trust-item"><span class="dot"></span><span>PCI Compliance Support</span></div>
+      <div class="trust-item"><span class="dot"></span><span>Dedicated Account Rep</span></div>
+      <div class="trust-item"><span class="dot"></span><span>Next-Day Terminal Replacement</span></div>
+    </div>
+  </div>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section id="sf-how">
+    <div class="wrap">
+      <div class="kicker">The Process</div>
+      <h2 class="section-title">From statement to switch</h2>
+      <p class="section-sub">Three steps, and no commitment required to find out what you're paying today.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="num">STEP 01</div>
+          <h3>Send a recent statement</h3>
+          <p>We read it the way a processor reads it, and translate it back into plain English — every line item, what it is, and whether it should be there.</p>
+        </div>
+        <div class="step">
+          <div class="num">STEP 02</div>
+          <h3>See the comparison side by side</h3>
+          <p>Your current costs next to ours, in the same format, on the same page. If we can't beat what you have, we'll tell you that instead.</p>
+        </div>
+        <div class="step">
+          <div class="num">STEP 03</div>
+          <h3>Switch without downtime</h3>
+          <p>We handle equipment, programming, and setup. Your business keeps running, and your rep stays with you afterward — not just through the sale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEE ANATOMY ================= -->
+  <section id="sf-fees" class="band-white">
+    <div class="wrap">
+      <div class="kicker">Fee Anatomy</div>
+      <h2 class="section-title">Every processing fee has three parts</h2>
+      <p class="section-sub">Bundled pricing hides which part is which. Once you can see the split, you can tell the difference between a cost and a markup.</p>
+
+      <div class="fee">
+        <div class="fee-part">
+          <div class="tag">Part 01 · Not ours</div>
+          <h4>Interchange</h4>
+          <p>Set by the card networks and paid to the card-issuing bank. Every processor pays the same rates. Nobody can discount this — anyone who says otherwise is repackaging something else.</p>
+        </div>
+        <div class="fee-part">
+          <div class="tag">Part 02 · Not ours</div>
+          <h4>Network Assessments</h4>
+          <p>Visa, Mastercard, Discover, and Amex each charge their own fees on top of interchange. Also fixed, also identical across processors.</p>
+        </div>
+        <div class="fee-part ours">
+          <div class="tag">Part 03 · Ours</div>
+          <h4>Our Markup</h4>
+          <p>The only part that's actually negotiable, and the only part we get paid on. We state it plainly and it stays where we set it — no re-pricing, no creep.</p>
+        </div>
+      </div>
+
+      <p class="fee-note">TWO OF THE THREE ARE THE SAME EVERYWHERE. THE THIRD IS WHERE PROCESSORS COMPETE — OR HIDE.</p>
+    </div>
+  </section>
+
+
+  <!-- ================= EFFECTIVE RATE CALCULATOR ================= -->
+  <section id="sf-calculator">
+    <div class="wrap">
+      <div class="kicker">Effective Rate</div>
+      <h2 class="section-title">The one number that compares</h2>
+      <p class="section-sub">Quoted rates aren't comparable to each other — they cover different things. Your effective rate is what you actually pay on every dollar you process, and it's the only figure that lets you compare two processors honestly. Two numbers off your statement is all it takes.</p>
+
+      <div class="calc">
+        <div class="calc-inputs">
+          <div class="calc-field">
+            <label for="sfcalc-volume">Monthly card volume</label>
+            <div class="calc-input-wrap">
+              <span class="sym">$</span>
+              <input type="text" inputmode="decimal" id="sfcalc-volume" value="53,175">
+            </div>
+            <span class="hint">Total dollars processed in a month, before fees.</span>
+          </div>
+
+          <div class="calc-field">
+            <label for="sfcalc-fees">Total monthly processing fees</label>
+            <div class="calc-input-wrap">
+              <span class="sym">$</span>
+              <input type="text" inputmode="decimal" id="sfcalc-fees" value="1,200">
+            </div>
+            <span class="hint">Every processing charge on the statement — discount, per-item, monthly, PCI, gateway, and any others.</span>
+          </div>
+
+          <p class="calc-note">This is arithmetic, not a quote. It tells you your true cost per dollar processed. What it can't tell you is how much of that is interchange and assessments versus markup — that requires reading the statement itself, which is what the free review does.</p>
+        </div>
+
+        <div class="calc-results">
+          <div class="calc-headline">Your Effective Rate</div>
+          <div class="calc-big"><span id="sfcalc-rate">2.26</span><span class="pct">%</span></div>
+          <div class="calc-big-label">of every dollar you process goes to fees</div>
+
+          <div class="calc-row">
+            <span class="k">Cost per $1,000 processed</span>
+            <span class="v" id="sfcalc-per-k">$22.57</span>
+          </div>
+          <div class="calc-row">
+            <span class="k">Annualized processing cost</span>
+            <span class="v" id="sfcalc-annual">$14,400</span>
+          </div>
+          <div class="calc-row">
+            <span class="k">Cost per $100,000 processed</span>
+            <span class="v" id="sfcalc-per-100k">$2,257</span>
+          </div>
+
+          <p class="calc-foot">Compare this figure against any quote you're given. If a processor won't state their pricing in a way that produces a comparable effective rate, that's the answer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="sf-services">
+    <div class="wrap">
+      <div class="kicker">What We Handle</div>
+      <h2 class="section-title">Every way your business takes payment</h2>
+      <p class="section-sub">In person, online, over the phone, or on a recurring schedule — with the infrastructure and the people behind all of it.</p>
+
+      <div class="grid">
+        <div class="card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <h3>In-Person Processing</h3>
+          <p>Modern terminals, Clover POS systems, tap-to-pay devices, and mobile readers — set up and programmed for how you actually operate.</p>
+        </div>
+        <div class="card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <h3>Ecommerce &amp; Gateways</h3>
+          <p>Secure gateways wired into your site, shopping cart, CRM, or invoicing platform — without handing you a technical project.</p>
+        </div>
+        <div class="card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <h3>Virtual Terminal &amp; Mobile</h3>
+          <p>Take payment from anywhere — by phone, by invoice, or from a device in the field. Built for contractors, consultants, and service businesses.</p>
+        </div>
+        <div class="card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          <h3>ACH &amp; Recurring Billing</h3>
+          <p>Subscriptions, retainers, and recurring charges — with fewer failed payments and less chasing across your client base.</p>
+        </div>
+        <div class="card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <h3>Gift &amp; Loyalty Programs</h3>
+          <p>Branded gift cards and loyalty programs that run through your point of sale instead of sitting beside it.</p>
+        </div>
+        <div class="card">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          <h3>Business Financing</h3>
+          <p>Merchant cash advances for qualified businesses — working capital underwritten against your existing processing volume.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= COMPARISON ================= -->
+  <section id="sf-compare" class="band-white">
+    <div class="wrap">
+      <div class="kicker">Side by Side</div>
+      <h2 class="section-title">The typical processor vs. Starfighter Financial</h2>
+      <p class="section-sub">The same comparison we walk every merchant through on their free statement review.</p>
+
+      <div class="compare-table">
+        <div class="compare-row head">
+          <div class="cell"></div>
+          <div class="cell">Typical Processor</div>
+          <div class="cell accent">Starfighter Financial</div>
+        </div>
+        <div class="compare-row"><div class="cell feature">Pricing model</div><div class="cell no">Bundled / blended rate</div><div class="cell yes">Interchange-plus, itemized</div></div>
+        <div class="compare-row"><div class="cell feature">Rate stability</div><div class="cell no">Increases without notice</div><div class="cell yes">60-month qualified rate guarantee</div></div>
+        <div class="compare-row"><div class="cell feature">Support</div><div class="cell no">Ticket queue / call center</div><div class="cell yes">Dedicated local rep</div></div>
+        <div class="compare-row"><div class="cell feature">Equipment cost</div><div class="cell no">Upfront purchase or lease</div><div class="cell yes">$0 out of pocket</div></div>
+        <div class="compare-row"><div class="cell feature">Contract terms</div><div class="cell no">Multi-year lock-in</div><div class="cell yes">No long-term contract</div></div>
+        <div class="compare-row"><div class="cell feature">Funding speed</div><div class="cell no">2&ndash;3 business days</div><div class="cell yes">Next-day funding</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY US ================= -->
+  <section id="why" class="dark">
+    <div class="wrap split">
+      <div>
+        <div class="kicker">Why Starfighter Financial</div>
+        <h2>Merchants stay because it works, not because they're locked in</h2>
+        <p>Payment processing should be simple to understand, honest in its pricing, and backed by people who pick up the phone. That's the entire operating thesis.</p>
+        <a href="#sf-start" class="btn btn-light btn-lg">Talk to a Real Person</a>
+      </div>
+      <div>
+        <div class="diff">
+          <div class="n">01</div>
+          <div>
+            <h4>Interchange-based pricing, stated openly</h4>
+            <p>You see where every dollar goes — interchange, assessments, and our markup as separate lines. No bundled rate with a markup buried inside it.</p>
+          </div>
+        </div>
+        <div class="diff">
+          <div class="n">02</div>
+          <div>
+            <h4>A dedicated rep, not a ticket queue</h4>
+            <p>One point of contact who knows your account and your business, reachable by phone rather than through a support portal.</p>
+          </div>
+        </div>
+        <div class="diff">
+          <div class="n">03</div>
+          <div>
+            <h4>Qualified rate guaranteed for 60 months</h4>
+            <p>Five years of rate stability, which protects you from the quiet re-pricing and annual creep that most merchant relationships accumulate.</p>
+          </div>
+        </div>
+        <div class="diff">
+          <div class="n">04</div>
+          <div>
+            <h4>No out-of-pocket equipment cost</h4>
+            <p>Terminals and POS systems with nothing upfront, and next-day replacement if hardware fails. Downtime costs more than the device does.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= SAVINGS ESTIMATOR =================
+       ⚠ THE 25% FIGURE IS A MATERIAL ADVERTISING CLAIM.
+       Substantiate it against real account data before publishing, or
+       change SAVINGS_FACTOR in the script below to a figure you can defend.
+  ================================================================= -->
+  <section id="sf-estimate" class="est">
+    <div class="wrap">
+      <div class="kicker">Free, No-Obligation Estimate</div>
+      <h2 class="section-title">See your estimated savings</h2>
+      <p class="section-sub">Move the sliders to match your business. This is a ballpark based on typical interchange-plus savings — send a statement for an exact number.</p>
+
+      <div class="est-card">
+        <div class="est-fields">
+          <div class="est-field">
+            <label for="sfsav-volume">Average Monthly Card Volume <span class="val" id="sfsav-volume-val">$40,000</span></label>
+            <input type="range" id="sfsav-volume" min="5000" max="200000" step="1000" value="40000">
+          </div>
+          <div class="est-field">
+            <label for="sfsav-rate">Your Current Effective Rate <span class="val" id="sfsav-rate-val">3.2%</span></label>
+            <input type="range" id="sfsav-rate" min="2.4" max="4.5" step="0.1" value="3.2">
+          </div>
+        </div>
+        <div class="est-out">
+          <div class="lbl">Estimated Annual Savings</div>
+          <div class="num"><span class="cur">$</span><span id="sfsav-out">3,840</span></div>
+          <div class="sub">Based on merchants seeing roughly 25% lower processing costs on average after switching.</div>
+        </div>
+        <p class="est-fine">Illustrative estimate only — not a quote. Actual savings depend on your card mix, average ticket size, and current agreement. <a href="#sf-start">Get your exact number &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= TESTIMONIALS =================
+       ⚠ PLACEHOLDER QUOTES — carried over from the source file, which
+       labelled them "(placeholder — swap in real client quotes)".
+       These are NOT real merchants. Replace with genuine, attributable
+       testimonials before publishing, or delete this section entirely.
+  ================================================================= -->
+  <section id="testimonials">
+    <div class="wrap">
+      <div class="kicker">Merchant Stories</div>
+      <h2 class="section-title">What switching actually sounds like</h2>
+      <p class="section-sub">Real accounts of what changes after the statement review.</p>
+
+      <div class="tgrid">
+        <div class="tcard">
+          <div class="tstars">★★★★★</div>
+          <p class="tquote">Our old provider kept adding fees we never agreed to. They walked us through every line of our statement and showed us exactly what we'd save before we switched.</p>
+          <div class="tperson"><div class="tavatar">M</div><div><div class="nm">Maria T.</div><div class="bz">Owner, retail storefront</div></div></div>
+        </div>
+        <div class="tcard">
+          <div class="tstars">★★★★★</div>
+          <p class="tquote">I have one person to call, and he actually picks up. That alone was worth switching for — the savings on top were a bonus.</p>
+          <div class="tperson"><div class="tavatar">D</div><div><div class="nm">David R.</div><div class="bz">Owner, home services company</div></div></div>
+        </div>
+        <div class="tcard">
+          <div class="tstars">★★★★★</div>
+          <p class="tquote">The switch took one afternoon. New terminals showed up programmed and ready — no downtime, no lost sales.</p>
+          <div class="tperson"><div class="tavatar">S</div><div><div class="nm">Sarah K.</div><div class="bz">Practice manager, healthcare clinic</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL ================= -->
+  <section id="sf-start" class="final">
+    <div class="wrap">
+      <h2>Find out what you're <span class="hl">actually paying.</span></h2>
+      <p>Send a recent processing statement and we'll return a line-by-line read of it — what each fee is, which parts are fixed, and what your markup looks like against ours. No commitment, and no obligation to switch.</p>
+      <a href="tel:+19285498006" class="btn btn-primary btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 10.5 19.36 19.36 0 011.64 2a2 2 0 012-2.18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-.82a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.17z"/></svg>
+        Call (928) 549-8006 for a Free Review
+      </a>
+      <div class="fineprint" data-placeholder="hours">MON&ndash;FRI · U.S.-BASED · NO SALES PRESSURE</div>
+      <div class="contact-line">
+        <a href="tel:+19285498006">(928) 549-8006</a> &middot; <a href="mailto:info@starfighterindustries.com">info@starfighterindustries.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div style="max-width: 300px;">
+          <a class="lockup lockup-reverse" href="https://www.starfighterfinancial.com" aria-label="Starfighter Financial — home" style="margin-bottom:1rem;">
+            <svg width="48" height="30" style="color: var(--accent);"><use href="#sf-sf-mark-rev"/></svg>
+            <span><span class="word">STARFIGHTER</span><span class="unit">FINANCIAL</span></span>
+          </a>
+          <p style="font-size:0.92rem;color:#9aa0ac;">Transparent, relationship-driven payment processing for small and midsize businesses across the United States.</p>
+          <p style="font-size:0.92rem;color:#6a6f7b;margin-top:0.9rem;" data-placeholder="address">Address to be added</p>
+          <p style="font-size:0.92rem;margin-top:0.4rem;"><a href="tel:+19285498006" style="color:#9aa0ac;">(928) 549-8006</a></p>
+        </div>
+        <div>
+          <div class="foot-h">Services</div>
+          <ul>
+            <li><a href="#sf-services">In-Person Processing</a></li>
+            <li><a href="#sf-services">Ecommerce &amp; Gateways</a></li>
+            <li><a href="#sf-services">Virtual Terminal</a></li>
+            <li><a href="#sf-services">Recurring Billing</a></li>
+            <li><a href="#sf-services">Gift &amp; Loyalty</a></li>
+            <li><a href="#sf-services">Business Financing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="foot-h">Our Companies</div>
+          <ul>
+            <li><a href="https://www.starfighterindustries.com">Starfighter Industries</a></li>
+            <li><a href="https://www.starfightermedia.com">Starfighter Media</a></li>
+            <li><a href="https://www.starfighterfitness.com">Starfighter Fitness</a></li>
+            <li><a href="https://www.starfighterfinancial.com">Starfighter Financial</a></li>
+            <li><a href="https://www.starfighterhealth.com">Starfighter Health</a></li>
+            <li><a href="https://www.starfighterrealestate.com">Starfighter Real Estate</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="foot-disclaimer">Starfighter Financial provides merchant payment processing and related business services. Rate guarantees apply to qualified rates and are subject to the terms of your merchant agreement. Financing is offered to qualified businesses subject to underwriting and approval. Nothing on this page is an offer of credit or financial advice.</p>
+      <div class="foot-bottom">
+        <span>© 2026 STARFIGHTER FINANCIAL</span>
+        <span>A STARFIGHTER INDUSTRIES COMPANY</span>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /.sf-site -->
+
+<script>
+(function () {
+  var root = document.querySelector('.sf-site');
+  if (!root) return;
+  var vol  = root.querySelector('#sfcalc-volume');
+  var fees = root.querySelector('#sfcalc-fees');
+  if (!vol || !fees) return;
+
+  var num = function (el) { return parseFloat(String(el.value).replace(/[^0-9.]/g, '')) || 0; };
+  var money = function (n, dp) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  };
+
+  function render() {
+    var v = num(vol), f = num(fees);
+    var rate = v > 0 ? (f / v) * 100 : 0;
+    root.querySelector('#sfcalc-rate').textContent    = rate.toFixed(2);
+    root.querySelector('#sfcalc-per-k').textContent   = money(v > 0 ? (f / v) * 1000 : 0, 2);
+    root.querySelector('#sfcalc-annual').textContent  = money(f * 12, 0);
+    root.querySelector('#sfcalc-per-100k').textContent= money(v > 0 ? (f / v) * 100000 : 0, 0);
+  }
+
+  function format(el) {
+    var n = num(el);
+    el.value = n ? n.toLocaleString('en-US', { maximumFractionDigits: 2 }) : '';
+  }
+
+  [vol, fees].forEach(function (el) {
+    el.addEventListener('input', render);
+    el.addEventListener('blur', function () { format(el); render(); });
+    el.addEventListener('focus', function () { el.value = String(el.value).replace(/,/g, ''); });
+  });
+
+  render();
+})();
+</script>
+
+
+
+<script>
+(function () {
+  var root = document.querySelector('.sf-site');
+  if (!root) return;
+  var vol = root.querySelector('#sfsav-volume'), rate = root.querySelector('#sfsav-rate');
+  if (!vol || !rate) return;
+  var volOut = root.querySelector('#sfsav-volume-val'),
+      rateOut = root.querySelector('#sfsav-rate-val'),
+      out = root.querySelector('#sfsav-out');
+
+  // Illustrative average reduction. Substantiate before publishing.
+  var SAVINGS_FACTOR = 0.25;
+
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+  function update() {
+    var v = parseFloat(vol.value), r = parseFloat(rate.value);
+    volOut.textContent = '$' + fmt(v);
+    rateOut.textContent = r.toFixed(1) + '%';
+    out.textContent = fmt(v * (r / 100) * 12 * SAVINGS_FACTOR);
+  }
+  vol.addEventListener('input', update);
+  rate.addEventListener('input', update);
+  update();
+})();
+</script>
